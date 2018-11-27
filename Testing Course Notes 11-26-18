@@ -1,0 +1,113 @@
+We want automated testing so that we can detect problems before they get too big to fix.
+
+Software testing achieves 5 main goals: Stakeholder goals, meeting functional requirements, correctly handles corner cases, assures optimal performance, and usability.
+
+Automated testing delivers reliability and quality and removes the fear of change. Getting reliable early feedback is the goal.
+
+===========================================
+TESTING HIERARCHY
+
+System testing, Aggregate testing, Unit testing.
+
+In unit testing we test a single method or class, without dependencies. Single small functions.
+
+Aggregate testing make sure a component does its job. It is slower than unit testing.
+
+System (or end to end testing) check if the application as a whole meets its requirements. The slowest test.
+
+JUnit is a testing framework helps writing tests. Common solutions to common problems.
+
+Make sure the name of the tests corresponds to the behavior of the method you are testing.
+
+===========================================
+COMMON STRUCTURE OF TESTS
+
+3 Things to get right.- The given clause
+
+The given clause establishes what the world looks like when the behaviour under test happens. Establishes preconditions of a test.
+
+The when clause answers what are we actually testing, what do we want to know works. 
+
+The then clause makes sure the test ended correctly. Normally follows a series of assertions. This is the post-condition of the test.
+
+===========================================
+
+EXCEPTIONS, FAILURES AND ERRORS
+
+An exceptions is a kind of assertion that breaks out of the method. There are two key benefits: providing powerful executable documentation, and able to test edge and error cases.
+
+Difference between failure and error.- Failures are result of some kind of assertion failing. The returned value and the expected value are not the same. An error occurs when the test throws a completely unexpected exception, this could mean that the test itself is broken. Basically an error happens when the test is not run correctly, and a failure happens when the test is run correctly but the application code is broken in some way.
+===========================================
+
+COSTS OF A TEST
+
+Maintenance, Readability and coupling. Poorly written tests might end up being a burden on productivity rather than a helper.
+
+===========================================
+
+GOOD PRACTICES
+
+Well named tests.- Provides executable documantation, helps us maintain our test over time. We also want to be able to tie our name to the body of the code.  The property to be tested needs to be clearly displayed in the name.
+
+Naming rules:
+
+	Use domain terminology.- Words that tie the test back to the properties and business requirements.
+
+	Use natural language.- Avoid using words that do not mean anything in an existing language like English or Spanish.
+
+	Be descriptive.- It is preferable to have a readable descriptive name so that we can get a better understanding of what the test does without consuming a lot of time.
+
+We are testing the behavior not an implementation.- We are trying to hit the public API and not things that are private. Do not reach out to the class to test it. Do not look at stuff that should be private in order to test it.
+
+Dont repeat yourself.- Avoid duplication when writting tests. 
+
+Diagnostics.- We want to go from the output of the test, to the root cause of the code that fails. A good  diagnostics practice would be writing a message in the output that describes what is actually failing.
+
+Hamcrest is a library used to write better tests by helping us avoid repetition and get better quality diagnostics as a result. It is described as a compositional matcher library. 
+
+A matcher is logic used in assertions. Hamcrest is compositional, meaning matchers can contain multiple matchers as parameters of its own.
+
+===========================================
+
+TEST DRIVEN DEVELOPMENT
+
+TDD is an approach that helps us solve problems such as: How to design code? how to encourage testing? and YAGNI ("You Aint Gonna Need It"). TDD discourages over-design that could be detrimental to the overall performance of our code. TDD also encourages writing tests before implementation, so that when the implementation phase begins, we already have tests at the ready.
+
+YAGNI refers to the idea of developing something when we actually need it, not when we foresee we could need it. This saves time and resources. 
+
+The ultimate goal of TDD is the incremental production of well designed and tested code.
+
+TDD has a three step looping process that starts with writing a test that fails (before implementation, which is the key characteristic of TDD). Then we move on to the implementation step and we make the test pass. Lastly we move the to the Refactor step, where we tidy up the test, to change things that could improve the test even further.
+
+TDD isn't just testing before the implementation, it's about using the tests to inform the implementation and deriving it from the tests.
+
+==========================================
+
+TRIANGULATION.
+
+Technique in TDD that lets us take specific examples and generalize whole algorithms from them. We expand these examples to produce a few more of them, and then we try to figure out the general case from there.
+
+===========================================
+
+DEPENDENCIES.
+
+A dependency is a relationship between two components where the functionality of one component relies on another component. 
+
+===========================================
+
+DEPENDENCY INJECTION.
+
+A pattern for decoupling our code by setting relations between instances. This can be done through constructors or setters which adds flexibility to our unit testing.
+
+===========================================
+
+TYPES OF TEST DOUBLES.
+
+	Fake.- Does have a working implementation that's much simpler than a real one.
+	Stub.- A ready-made answer to method calls. Returns simple dumb values which are the values needed for the test to pass.
+	Mock.- Tests the interactions with the objects.
+===========================================
+
+OUTSIDE-IN APPROACH
+
+A failing test does not always require you to write new implementation code. Instead, it may require that you implement new functionality at a different level. If a test pushes you to a lower level, you restart your red, green, refactor cycle by writing a new test.
